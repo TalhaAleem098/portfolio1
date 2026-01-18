@@ -8,7 +8,7 @@ import { MdSend } from "react-icons/md";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export default function Contact() {
+export default function Contact({ id }) {
   const containerRef = useRef(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -80,7 +80,7 @@ export default function Contact() {
     e.preventDefault();
     
     // Create mailto link with form data
-    const mailtoLink = `mailto:aleem.talha@rategmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
+    const mailtoLink = `mailto:aleemtalha098@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
     )}`;
     
@@ -95,6 +95,7 @@ export default function Contact() {
   return (
     <section
       ref={containerRef}
+      id={id}
       className="relative z-20 w-full min-h-screen bg-gradient-to-b from-[#0f0f1e] via-[#1a1a2e] to-[#0f0f1e] py-32 px-4 md:px-8"
     >
       {/* Section Header */}
@@ -119,10 +120,10 @@ export default function Contact() {
             Send me an email with your project details and let's connect.
           </p>
           <a
-            href="mailto:aleem.talha@rategmail.com"
+            href="mailto:aleemtalha098@gmail.com"
             className="inline-flex items-center gap-2 text-emerald-300 font-semibold hover:text-emerald-200 transition-colors"
           >
-            aleem.talha@rategmail.com
+            aleemtalha098@gmail.com
             <MdSend className="text-lg" />
           </a>
         </div>
@@ -137,7 +138,7 @@ export default function Contact() {
             Quick chat? Hit me up on WhatsApp for instant conversation.
           </p>
           <a
-            href="https://wa.me/923001234567"
+            href="https://wa.me/923270445135"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 text-emerald-300 font-semibold hover:text-emerald-200 transition-colors"
@@ -154,13 +155,13 @@ export default function Contact() {
           </div>
           <h3 className="text-xl font-bold text-white mb-2">Phone</h3>
           <p className="text-slate-400 mb-4">
-            Prefer a direct call? Let's have a conversation about your needs.
+            Prefer a direct call? Let&APOS;s have a conversation about your needs.
           </p>
           <a
-            href="tel:+923001234567"
+            href="tel:+923270445135"
             className="inline-flex items-center gap-2 text-emerald-300 font-semibold hover:text-emerald-200 transition-colors"
           >
-            +92 300 1234567
+            +92 3270445135
             <FaPhone className="text-lg" />
           </a>
         </div>

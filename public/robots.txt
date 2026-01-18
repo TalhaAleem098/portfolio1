@@ -1,0 +1,47 @@
+# Robots.txt for aleemtalhadev.vercel.app
+# Portfolio website of Talha Aleem - Full-Stack Developer
+
+User-agent: *
+Allow: /
+
+# Allow all major search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Block access to sensitive files and directories
+Disallow: /api/
+Disallow: /_next/
+Disallow: /node_modules/
+Disallow: /.next/
+Disallow: /.vercel/
+Disallow: /out/
+
+# Block admin and private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow access to CSS, JS, and images
+Allow: /_next/static/
+Allow: *.css
+Allow: *.js
+Allow: *.png
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.gif
+Allow: *.svg
+Allow: *.ico
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1
+
+# Sitemap location
+Sitemap: https://aleemtalhadev.vercel.app/sitemap.xml

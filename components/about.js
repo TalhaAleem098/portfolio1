@@ -8,7 +8,7 @@ if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
 
-export default function About() {
+export default function About({ id }) {
   const containerRef = useRef();
 
   useGSAP(() => {
@@ -46,6 +46,7 @@ export default function About() {
   return (
     <section 
       ref={containerRef}
+      id={id}
       className="relative z-10 w-full flex flex-col items-center justify-center px-6 py-20 bg-gradient-to-b from-transparent to-zinc-950/50"
     >
       <div className="max-w-4xl text-center">

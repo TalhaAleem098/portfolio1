@@ -82,7 +82,7 @@ export default function Page() {
             </svg>
           </div>
 
-          <section className="relative z-10 w-full flex flex-col items-center justify-center h-[90vh]">
+          <section className="relative z-10 w-full flex flex-col items-center justify-center h-[90vh]" id="home">
             <div className="overflow-hidden mb-4">
               <span className="block text-emerald-400 text-xs tracking-[0.5em] uppercase opacity-80">
                 Full-Stack Architect
@@ -106,11 +106,11 @@ export default function Page() {
           </section>
 
           <String />
-          <About />
-          <Work />
+          <About id="about" />
+          <Work id="work" />
           <EducationSkills />
           <Experience />
-          <Contact />
+          <Contact id="contact" />
           <Footer />
         </div>
       )}

@@ -59,7 +59,7 @@ const PROJECTS = [
   },
 ];
 
-export default function Work() {
+export default function Work({ id }) {
   const sectionRef = useRef(null);
   const trackRef = useRef(null);
 
@@ -113,6 +113,7 @@ export default function Work() {
   return (
     <section
       ref={sectionRef}
+      id={id}
       className="bg-[#080028] relative overflow-hidden min-h-screen"
     >
       <div

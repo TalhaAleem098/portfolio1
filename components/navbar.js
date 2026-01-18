@@ -1,13 +1,34 @@
 "use client";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { X } from "lucide-react";
 
 const Navbar = () => {
   const navRef = useRef();
   const menuRef = useRef();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Smooth scroll function
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      const offsetTop = element.offsetTop - 80; // Account for fixed navbar height
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
+      });
+    }
+    setIsOpen(false); // Close mobile menu after clicking
+  };
+
+  // Handle initial page load with hash
+  useEffect(() => {
+    if (window.location.hash) {
+      const sectionId = window.location.hash.substring(1);
+      setTimeout(() => scrollToSection(sectionId), 100);
+    }
+  }, []);
 
   useGSAP(
     () => {
@@ -63,14 +84,14 @@ const Navbar = () => {
       <div className="w-full px-6 md:px-12 py-5 flex justify-between items-center">
         <div className="hidden md:flex items-center space-x-12">
           {navItems.map((item) => (
-            <a
+            <button
               key={item}
-              href={`#${item.toLowerCase()}`}
-              className="nav-link text-[11px] font-bold uppercase tracking-[0.25em] text-zinc-100 hover:text-emerald-400 transition-all relative group"
+              onClick={() => scrollToSection(item.toLowerCase())}
+              className="nav-link text-[11px] font-bold uppercase tracking-[0.25em] text-zinc-100 hover:text-emerald-400 transition-all relative group cursor-pointer"
             >
               {item}
               <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-emerald-400 shadow-[0_0_12px_#34d399] transition-all duration-500 group-hover:w-full"></span>
-            </a>
+            </button>
           ))}
         </div>
 
@@ -105,14 +126,13 @@ const Navbar = () => {
 
         <div className="mt-20 flex flex-col gap-8">
           {navItems.map((item) => (
-            <a
+            <button
               key={item}
-              href={`#${item.toLowerCase()}`}
-              onClick={() => setIsOpen(false)}
-              className="mobile-link text-4xl font-black uppercase tracking-tighter text-zinc-100 hover:text-emerald-500 transition-colors"
+              onClick={() => scrollToSection(item.toLowerCase())}
+              className="mobile-link text-4xl font-black uppercase tracking-tighter text-zinc-100 hover:text-emerald-500 transition-colors text-left"
             >
               {item}
-            </a>
+            </button>
           ))}
         </div>
 

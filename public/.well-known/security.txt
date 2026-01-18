@@ -1,0 +1,6 @@
+# Security.txt for aleemtalhadev.vercel.app
+# Contact information for security researchers
+
+Contact: mailto:aleem.talha@rategmail.com
+Expires: 2025-01-18T00:00:00.000Z
+Preferred-Languages: en
