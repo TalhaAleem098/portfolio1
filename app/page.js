@@ -1,65 +1,119 @@
-import Image from "next/image";
+"use client";
+import Loading from "@/components/preloading";
+import Navbar from "@/components/navbar";
+import Cursor from "@/components/cursor";
+import { useState, useRef, useEffect } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import String from "@/components/string";
+import Work from "@/components/work";
+import About from "@/components/about";
+import EducationSkills from "@/components/education&skills";
+import Experience from "@/components/experience";
+import Contact from "@/components/contact";
+import Footer from "@/components/footer";
 
-export default function Home() {
+export default function Page() {
+  const [loaded, setLoaded] = useState(false);
+  const heroRef = useRef();
+
+  useGSAP(() => {
+    if (loaded) {
+      const tl = gsap.timeline({ markers: true }); // Enable markers for debugging
+
+      tl.addLabel("hero-start");
+
+      // 1. Reveal Name with a "rise and shine" effect
+      tl.fromTo(
+        ".hero-name",
+        { y: 150, skewY: 10, opacity: 0 },
+        {
+          y: 0,
+          skewY: 0,
+          opacity: 1,
+          duration: 1.5,
+          ease: "expo.out",
+          delay: 0.2,
+        },
+      );
+
+      tl.addLabel("hero-end");
+
+      // 2. Floating animation for background SVGs
+      gsap.to(".bg-shape", {
+        y: "random(-20, 20)",
+        x: "random(-20, 20)",
+        repeat: -1,
+        yoyo: true,
+        duration: 3,
+        ease: "sine.inOut",
+        stagger: 0.2,
+      });
+
+      // About section animations
+    }
+  }, [loaded]);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="bg-[#050505] min-h-screen w-full relative overflow-hidden">
+      <Cursor />
+
+      1. Preloader
+      {!loaded && <Loading onComplete={() => setLoaded(true)} />}
+
+      {loaded && (
+        <div ref={heroRef} className="relative w-full">
+          <Navbar />
+
+          <div className="absolute inset-0 z-0 flex justify-center pointer-events-none ">
+            <svg
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              className="bg-shape w-[120%] h-[120%] opacity-50"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <defs>
+                <radialGradient id="whiteGlow" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stopColor="white" stopOpacity="0.6" />
+                  <stop offset="40%" stopColor="white" stopOpacity="0.2" />
+                  <stop offset="100%" stopColor="white" stopOpacity="0" />
+                </radialGradient>
+              </defs>
+              <circle cx="500" cy="500" r="500" fill="url(#whiteGlow)" />
+            </svg>
+          </div>
+
+          <section className="relative z-10 w-full flex flex-col items-center justify-center h-[90vh]">
+            <div className="overflow-hidden mb-4">
+              <span className="block text-emerald-400 text-xs tracking-[0.5em] uppercase opacity-80">
+                Full-Stack Architect
+              </span>
+            </div>
+
+            <div className="overflow-hidden py-2 w-full mx-auto">
+              <h1 className="hero-name text-[14vw] w-full text-center mx-auto font-black leading-none text-white tracking-tighter uppercase select-none">
+                Aleem Talha
+              </h1>
+            </div>
+
+            <div className="max-w-2xl text-center mt-8">
+              <p className="text-zinc-500 text-sm md:text-base tracking-widest leading-relaxed uppercase">
+                Crafting high-performance digital experiences <br />
+                with <span className="text-white">Node.js</span>,{" "}
+                <span className="text-white">Next.js</span> &{" "}
+                <span className="text-white">.NET Core</span>
+              </p>
+            </div>
+          </section>
+
+          <String />
+          <About />
+          <Work />
+          <EducationSkills />
+          <Experience />
+          <Contact />
+          <Footer />
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      )}
+    </main>
   );
 }
